@@ -1,4 +1,3 @@
-// app/jobs/[id]/page.tsx (Server Component)
 import JobDetailClient from "@/app/components/JobDetailClient";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -10,17 +9,18 @@ interface Job {
   created_at: string;
 }
 
+// Server Component — NO "use client"
 export default async function JobDetailPage({
-  params, // THIS IS DIRECTLY AVAILABLE
+  params,
 }: {
-  params: { id: string };
+  params: { id: string } | Promise<{ id: string }>; // params may be a promise
 }) {
-  const { id } = params;
+  // Unwrap the promise if needed
+  const resolvedParams = await params;
+  const { id } = resolvedParams;
 
-  // Always log to check
-  console.log("Server params.id:", id);
+  if (!id) return <p>Invalid job ID</p>;
 
-  // Fetch job from Supabase
   const { data: job, error } = await supabase
     .from("jobs")
     .select("*")
@@ -34,6 +34,5 @@ export default async function JobDetailPage({
 
   if (!job) return <p>Job not found</p>;
 
-  // Pass job to Client Component
   return <JobDetailClient job={job as Job} />;
 }

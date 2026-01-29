@@ -1,32 +1,65 @@
-// app/components/ApplicationCard.tsx
-interface ApplicationCardProps {
+"use client";
+
+import { useRouter } from "next/navigation";
+
+interface Job {
+  id: string;
+  title: string;
+  company: string;
+  location?: string;
+}
+
+interface Props {
   application: {
-    id: string;
-    cover_letter: string;
+    id: number;
     status: string;
-    jobs: { title: string }[];
-    users: { name: string; email: string }[];
+    created_at: string;
+    jobs: Job[] | null; // ✅ ARRAY
   };
 }
 
-export default function ApplicationCard({ application }: ApplicationCardProps) {
-  const { id, cover_letter, status, jobs, users } = application;
+export default function UserApplicationCard({ application }: Props) {
+  const router = useRouter();
+
+  // ✅ safely get the job
+  const job = application.jobs?.[0];
+
   return (
-    <div className="border rounded p-4 shadow mb-4">
-      <h2 className="text-lg font-bold">Application ID: {id}</h2>
-      <p>
-        <strong>Job:</strong> {jobs[0]?.title || "N/A"}
-      </p>
-      <p>
-        <strong>Applicant:</strong> {users[0]?.name} ({users[0]?.email})
-      </p>
-      <p>
-        <strong>Status:</strong> {status}
-      </p>
-      <p className="mt-2">
-        <strong>Cover Letter:</strong>
-      </p>
-      <p className="bg-gray-100 p-2 rounded">{cover_letter}</p>
+    <div className="flex items-center justify-between bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition">
+      {/* Job Info */}
+      <div>
+        <h3 className="font-semibold text-lg">{job?.title ?? "Unknown job"}</h3>
+        <p className="text-gray-600">
+          {job?.company ?? "Unknown company"} • {job?.location ?? "Remote"}
+        </p>
+        <p className="text-sm text-gray-400 mt-1">
+          Applied {new Date(application.created_at).toLocaleDateString()}
+        </p>
+      </div>
+
+      {/* Status */}
+      <div className="flex items-center gap-4">
+        <span
+          className={`px-3 py-1 rounded-full text-sm font-medium ${
+            application.status === "pending"
+              ? "bg-yellow-100 text-yellow-700"
+              : application.status === "accepted"
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+          }`}
+        >
+          {application.status}
+        </span>
+
+        {job?.id && (
+          <button
+            onClick={() => router.push(`/jobs/${job.id}`)}
+            className="text-sm text-primary hover:underline"
+          >
+            View Job
+          </button>
+        )}
+      </div>
     </div>
   );
 }

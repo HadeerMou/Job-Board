@@ -7,10 +7,16 @@ import Providers from "./providers";
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 min-h-screen font-sans text-gray-900">
+      <body className="flex flex-col min-h-screen bg-gray-50 font-sans text-gray-900">
         <Providers>
           <Header />
-          <main className="max-w-7xl mx-auto px-6 py-16">{children}</main>
+
+          {/* Main stretches full width */}
+          <main className="grow w-full py-16">
+            {/* Inner container with max width */}
+            <div className="max-w-7xl mx-auto px-6">{children}</div>
+          </main>
+
           <Footer />
         </Providers>
       </body>
