@@ -4,7 +4,7 @@ import { useState } from "react";
 import AdminJobs from "./jobs/page";
 import AdminApplications from "./applications/page";
 import AdminUsers from "./users/page";
-import AdminDashboardSummary from "../components/AdminDashboardSummary";
+import AdminDashboardSummary from "../../components/AdminDashboardSummary";
 
 export default function AdminDashboard() {
   const [tab, setTab] = useState("jobs");

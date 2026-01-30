@@ -46,7 +46,7 @@ export default function AdminJobCard({ job, onDelete }: AdminJobCardProps) {
   };
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-lg bg-white shadow-md hover:shadow-lg transition cursor-pointer">
+    <div className="flex items-center justify-between p-4 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer">
       <div className="flex items-center gap-4">
         {job.companyLogo && (
           <img

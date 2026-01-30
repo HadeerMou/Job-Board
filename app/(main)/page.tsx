@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "../../lib/supabaseClient";
 import { useJobs } from "@/lib/hooks/useJobs";
 import JobCard from "@/app/components/JobCard";
 
@@ -37,7 +37,7 @@ export default function Home() {
         </div>
       </section>
       {/* Filters/Search */}
-      <section className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-12">
+      <section className="max-w-4xl mx-auto rounded-xl shadow-lg p-6 mb-12">
         <form className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center">
           <input
             type="text"

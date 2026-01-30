@@ -36,7 +36,7 @@ export default function AdminApplications() {
         full_name,
         role
       )
-    `
+    `,
       )
       .returns<Application[]>();
 
@@ -54,10 +54,14 @@ export default function AdminApplications() {
   }, []);
 
   if (loading)
-    return <p className="text-center text-gray-500 mt-6">Loading applications...</p>;
+    return (
+      <p className="text-center text-gray-500 mt-6">Loading applications...</p>
+    );
 
   if (applications.length === 0)
-    return <p className="text-center text-gray-500 mt-6">No applications found.</p>;
+    return (
+      <p className="text-center text-gray-500 mt-6">No applications found.</p>
+    );
 
   return (
     <div className="p-6">
@@ -67,14 +71,16 @@ export default function AdminApplications() {
         {applications.map((app) => (
           <div
             key={app.id}
-            className="bg-white rounded-lg p-6 shadow-inner hover:shadow-lg transition-shadow duration-300"
+            className="rounded-lg p-6 shadow-inner hover:shadow-lg transition-shadow duration-300"
           >
             {/* Job Info */}
             <div className="mb-4">
               <h2 className="text-lg font-semibold text-gray-800">
                 Job: {app.jobs?.title ?? "No Job Info"}
               </h2>
-              <p className="text-gray-600">Company: {app.jobs?.company ?? "Unknown"}</p>
+              <p className="text-gray-600">
+                Company: {app.jobs?.company ?? "Unknown"}
+              </p>
             </div>
 
             {/* User Info */}

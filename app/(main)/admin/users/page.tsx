@@ -36,7 +36,7 @@ export default function AdminUsers() {
           {users.map((user) => (
             <li
               key={user.id}
-              className="p-4 border rounded-lg bg-white hover:shadow-md transition flex justify-between"
+              className="p-4 border rounded-lg hover:shadow-md transition flex justify-between"
             >
               <span>{user.full_name}</span>
               <span className="text-gray-500">{user.role}</span>

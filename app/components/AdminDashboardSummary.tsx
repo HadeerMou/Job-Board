@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 
 function SummaryCard({ title, count }: { title: string; count: number }) {
   return (
-    <div className="bg-white rounded-lg p-6 shadow flex flex-col items-center">
+    <div className=" rounded-lg p-6 shadow flex flex-col items-center">
       <h3 className="uppercase text-sm font-semibold text-gray-500 mb-2">
         {title}
       </h3>

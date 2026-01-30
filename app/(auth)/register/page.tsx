@@ -22,9 +22,7 @@ export default function RegisterPage() {
   return (
     <>
       {/* Header */}
-      <h1 className="text-center text-2xl font-semibold text-gray-900 mb-6">
-        Sign Up
-      </h1>
+      <h1 className="text-center text-2xl font-semibold  mb-6">Sign Up</h1>
 
       <form
         onSubmit={(e) => {

@@ -3,6 +3,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // router for navigation
 import { FaApple, FaGoogle, FaTwitter } from "react-icons/fa";
 
 export default function LoginPage() {
@@ -11,31 +12,65 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const router = useRouter();
+
   const login = async () => {
     setLoading(true);
     setError(null);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      // Sign in user
+      const { data: signInData, error: signInError } =
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-    if (error) setError(error.message);
-    setLoading(false);
+      if (signInError) throw new Error(signInError.message);
+
+      const userId = signInData.user?.id;
+      if (!userId) throw new Error("No user found");
+
+      // Try to fetch role from profile
+      const { data: profileData, error: profileError } = await supabase
+        .from("profile")
+        .select("role")
+        .eq("id", userId)
+        .single();
+
+      let role: string;
+
+      if (profileError || !profileData) {
+        console.warn("Profile fetch failed:", profileError?.message);
+        // Fallback role if profile cannot be fetched
+        role = "user";
+      } else {
+        role = profileData.role;
+      }
+
+      // Redirect based on role
+      if (role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/");
+      }
+    } catch (err: any) {
+      setError(err.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       {/* Logo + Header */}
       <div className="flex justify-center mb-6">
-        <div className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl font-bold">
-          A
+        <div className="w-15 h-15 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl font-bold">
+          WTH
         </div>
       </div>
 
-      <h2 className="text-center text-2xl font-semibold text-gray-900 mb-1">
-        Welcome Back
-      </h2>
+      <h2 className="text-center text-2xl font-semibold mb-1">Welcome Back</h2>
       <p className="text-center text-gray-500 mb-8 text-sm">
         Don’t have an account yet?{" "}
         <Link
@@ -64,15 +99,6 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
           />
-          <svg
-            className="absolute left-3 top-3.5 w-5 h-5 text-gray-400 pointer-events-none"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M16 12H8m0 0l4-4m-4 4l4 4" />
-          </svg>
         </div>
 
         <div className="relative">
@@ -85,16 +111,6 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
-          <svg
-            className="absolute left-3 top-3.5 w-5 h-5 text-gray-400 pointer-events-none"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z" />
-            <path d="M5 12a7 7 0 0114 0v4a3 3 0 01-3 3H8a3 3 0 01-3-3v-4z" />
-          </svg>
         </div>
 
         {error && (

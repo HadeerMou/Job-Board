@@ -21,7 +21,7 @@ export default function JobCard({ job }: JobCardProps) {
   return (
     <div
       onClick={navigateToJob}
-      className="flex items-center justify-between p-4 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      className="flex items-center justify-between p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
       <div className="flex items-center gap-4">
         {job.companyLogo && (

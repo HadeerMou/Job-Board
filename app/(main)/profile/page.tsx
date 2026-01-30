@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import UserApplicationCard from "../components/ApplicationCard";
+import UserApplicationCard from "../../components/ApplicationCard";
 
 type Tab = "applications" | "cv" | "profile";
 

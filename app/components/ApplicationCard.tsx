@@ -25,7 +25,7 @@ export default function UserApplicationCard({ application }: Props) {
   const job = application.jobs?.[0];
 
   return (
-    <div className="flex items-center justify-between bg-white p-5 rounded-xl shadow-sm hover:shadow-md transition">
+    <div className="flex items-center justify-between p-5 rounded-xl shadow-sm hover:shadow-md transition">
       {/* Job Info */}
       <div>
         <h3 className="font-semibold text-lg">{job?.title ?? "Unknown job"}</h3>
