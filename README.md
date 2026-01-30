@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+JobBoard Platform
 
-## Getting Started
+A modern JobBoard web application built to connect employers and job seekers, featuring separate admin and user experiences, real-time authentication, and a responsive UI. The application is fully deployed and production-ready.
 
-First, run the development server:
+🧩 Features
+  User Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+User authentication (sign up / login / logout)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Browse available job listings
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+View job details
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Apply for jobs
 
-## Learn More
+Manage user profile
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🛠️ Admin Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Admin authentication
 
-## Deploy on Vercel
+Create, edit, and delete job postings
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+View all job applications
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+view all users
+
+Admin dashboard with protected routes
+
+Real-time updates
+-------------------------------------------------------
+
+Dark / Light mode support
+
+Fully responsive design (mobile & desktop)
+
+
+🏗️ Tech Stack
+Frontend
+
+Next.js
+
+React
+
+Tailwind CSS
+
+React Query (TanStack Query) – data fetching & caching
+
+next-themes – dark mode support
+
+React Icons
+
+Backend & Database
+
+Supabase
+
+Authentication
+
+Database
+
+API integration
+
+Deployment
+
+Vercel
+
+🎨 UI & UX
+
+Responsive layout for all screen sizes
+
+Clean and modern UI
+
+Dark mode / Light mode toggle
+
+Optimized performance and accessibility
+
+🔐 Authentication & Authorization
+
+Supabase authentication
+
+Role-based access (Admin / User)
+
+Protected routes for admin pages
+
+Secure session handling
